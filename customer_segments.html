@@ -397,6 +397,8 @@ div#notebook {
 <span class="n">samples</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices</span><span class="p">],</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
 <span class="k">print</span> <span class="s2">&quot;Chosen samples of wholesale customers dataset:&quot;</span>
 <span class="n">display</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">samples</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">()))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">samples</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">samples</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -465,6 +467,108 @@ div#notebook {
 
 </div>
 
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.343083</td>
+      <td>7.970497</td>
+      <td>11.668972</td>
+      <td>0.333984</td>
+      <td>14.171121</td>
+      <td>1.930492</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>9.345917</td>
+      <td>5.111629</td>
+      <td>2.282480</td>
+      <td>5.450846</td>
+      <td>1.717459</td>
+      <td>5.606557</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3.070583</td>
+      <td>7.582816</td>
+      <td>2.536788</td>
+      <td>11.892578</td>
+      <td>0.082957</td>
+      <td>31.438033</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>8.062894</td>
+      <td>23.111096</td>
+      <td>46.415296</td>
+      <td>0.513280</td>
+      <td>20.424631</td>
+      <td>1.472803</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>58.974386</td>
+      <td>15.579301</td>
+      <td>9.543091</td>
+      <td>8.805326</td>
+      <td>2.601896</td>
+      <td>4.496001</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>19.844035</td>
+      <td>23.669372</td>
+      <td>10.862599</td>
+      <td>19.675468</td>
+      <td>0.128714</td>
+      <td>25.819811</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -487,9 +591,9 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong><br>
-0 (85) - probably some big grocery store (buys a lot of groceries and detergents)<br>
-1 (181) - probably some big restaurant chain (buys a lot of fresh food)<br>
-2 (183) - probably some big deli chain (buys a lot of delicatessen)</p>
+0 (85) - probably some big grocery store. Buys 12x more groceries than mean. Spends 46% on groceries, 23% on milk and 20% on detergents<br>
+1 (181) - probably some big restaurant chain. Buys 9x more fresh food than mean. Spends 58% on fresh foods<br>
+2 (183) - probably some big deli chain. Buys 31x more delicatessen than mean. Spends 26% on deli</p>
 
 </div>
 </div>
@@ -2375,7 +2479,7 @@ Ny7+WPF7swAAAABJRU5ErkJggg==
 <p><strong>Answer:</strong><br>
 'Detergents_Paper' and 'Grocery' appear to be correlated. There is also some degree of correlation between 'Grocery' and 'Milk' as well as 'Milk' and 'Detergents_Paper'.<br>
 This confirms that 'Grocery' is correlated with other features thus providing less information.<br>
-Distribution for all the features looks a bit like Poisson distribution. I.e. number of data points drops exponentially when we increase feature value.</p>
+Distribution for all the features looks like lognormal distribution or a skewed normal distribution.</p>
 
 </div>
 </div>
@@ -6913,7 +7017,7 @@ Once you have performed this implementation, the dataset will be stored in the v
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong><br>
-Yes, like point 75.<br>
+Yes, points 75, 65, 66, 128, 154.<br>
 Outliers don't appear to be skewing data too much (according to graphs after log transformation) so decided to leave data set as it is.</p>
 
 </div>
@@ -8531,6 +8635,8 @@ oPLCAAAAAElFTkSuQmCC
 <span class="n">true_centers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">true_centers</span><span class="p">),</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 <span class="n">true_centers</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">segments</span>
 <span class="n">display</span><span class="p">(</span><span class="n">true_centers</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">true_centers</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">()))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">true_centers</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">true_centers</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -8583,6 +8689,90 @@ oPLCAAAAAElFTkSuQmCC
 
 </div>
 
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Segment 0</th>
+      <td>0.2975</td>
+      <td>1.336957</td>
+      <td>1.567476</td>
+      <td>0.292969</td>
+      <td>1.585213</td>
+      <td>0.633443</td>
+    </tr>
+    <tr>
+      <th>Segment 1</th>
+      <td>0.7495</td>
+      <td>0.329365</td>
+      <td>0.297573</td>
+      <td>0.677409</td>
+      <td>0.100659</td>
+      <td>0.446557</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Segment 0</th>
+      <td>11.815324</td>
+      <td>25.646202</td>
+      <td>41.247725</td>
+      <td>2.978653</td>
+      <td>15.115009</td>
+      <td>3.197088</td>
+    </tr>
+    <tr>
+      <th>Segment 1</th>
+      <td>55.106917</td>
+      <td>11.696587</td>
+      <td>14.496661</td>
+      <td>12.750444</td>
+      <td>1.776852</td>
+      <td>4.172538</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -8604,8 +8794,8 @@ oPLCAAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong><br>
-Segment 0 - high volumes of groceries, detergents, milk -&gt; grocery stores<br>
-Segment 1 - high volumes of fresh and frozen foods -&gt; restaurants</p>
+Segment 0 - 41% spend on grocery, 25% milk, 15% detergents -&gt; retailers (grocery stores)<br>
+Segment 1 - 55% spend on fresh food -&gt; restaurants</p>
 
 </div>
 </div>
@@ -8629,6 +8819,9 @@ Segment 1 - high volumes of fresh and frozen foods -&gt; restaurants</p>
 <div class=" highlight hl-ipython2"><pre><span class="c1"># Display the predictions</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pred</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample_preds</span><span class="p">):</span>
     <span class="k">print</span> <span class="s2">&quot;Sample point&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s2">&quot;predicted to be in Cluster&quot;</span><span class="p">,</span> <span class="n">pred</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">true_centers</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">true_centers</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">samples</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">samples</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -8648,6 +8841,99 @@ Sample point 2 predicted to be in Cluster 1
 </div>
 </div>
 
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Segment 0</th>
+      <td>11.815324</td>
+      <td>25.646202</td>
+      <td>41.247725</td>
+      <td>2.978653</td>
+      <td>15.115009</td>
+      <td>3.197088</td>
+    </tr>
+    <tr>
+      <th>Segment 1</th>
+      <td>55.106917</td>
+      <td>11.696587</td>
+      <td>14.496661</td>
+      <td>12.750444</td>
+      <td>1.776852</td>
+      <td>4.172538</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>8.062894</td>
+      <td>23.111096</td>
+      <td>46.415296</td>
+      <td>0.513280</td>
+      <td>20.424631</td>
+      <td>1.472803</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>58.974386</td>
+      <td>15.579301</td>
+      <td>9.543091</td>
+      <td>8.805326</td>
+      <td>2.601896</td>
+      <td>4.496001</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>19.844035</td>
+      <td>23.669372</td>
+      <td>10.862599</td>
+      <td>19.675468</td>
+      <td>0.128714</td>
+      <td>25.819811</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -8658,9 +8944,9 @@ Sample point 2 predicted to be in Cluster 1
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong><br>
-Sample point 0 - looks like grocery store, predicted to be in segment 0, consistent<br>
-Smaple point 1 - looks like restaurant chain, predicted to be in segment 0, inconsistent<br>
-Smaple point 2 - looks like deli chain chain, predicted to be in segment 1, consistent</p>
+Sample point 0 - predicted to be in segment 0, has a high percentage of spend on groceries, milk and detergents - prediction is consistent with cluster center<br>
+Smaple point 1 - predicted to be in segment 0, has a high percentage of spend on fresh food, actually more consistent with cluster 0 (we can see that this point is near the 'boundary' separating 2 clusters, so we shouldnt believe in this prediction too much)<br>
+Smaple point 2 - predicted to be is segment 1, has a higher than average spend on fresh and frozen foods and deli, so prediction looks more or less consistent</p>
 
 </div>
 </div>
@@ -8713,7 +8999,8 @@ It would be feasible to test and measure delivery sevice changes separately on d
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong><br>
-Nice feature to include would be 'customer type'</p>
+Nice feature to include would be 'customer type'<br>
+Also, maybe adding percentage spends on different categories would help</p>
 
 </div>
 </div>
